@@ -1090,6 +1090,7 @@
 		EF27CD9E20C161500077FE55 /* ProfileViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF27CD9B20C161500077FE55 /* ProfileViewControllerTests.swift */; };
 		EF27CD9F20C161500077FE55 /* ProfileClientViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF27CD9C20C161500077FE55 /* ProfileClientViewControllerTests.swift */; };
 		EF27CDA020C161500077FE55 /* ClientListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF27CD9D20C161500077FE55 /* ClientListViewControllerTests.swift */; };
+		EF29431520C93925000C16F3 /* ConversationContentViewController+Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF29431420C93925000C16F3 /* ConversationContentViewController+Header.swift */; };
 		EF2971582099AD8700EFE6A4 /* SelfProfileViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2971552099AD3000EFE6A4 /* SelfProfileViewControllerTests.swift */; };
 		EF2C189E1FED0D6900E9F2FD /* ConversationCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2C189C1FED0D3000E9F2FD /* ConversationCellTests.swift */; };
 		EF2C18A01FED435600E9F2FD /* ConversationCell+BurstTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2C189F1FED435600E9F2FD /* ConversationCell+BurstTimestamp.swift */; };
@@ -2727,6 +2728,7 @@
 		EF27CD9B20C161500077FE55 /* ProfileViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerTests.swift; sourceTree = "<group>"; };
 		EF27CD9C20C161500077FE55 /* ProfileClientViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileClientViewControllerTests.swift; sourceTree = "<group>"; };
 		EF27CD9D20C161500077FE55 /* ClientListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientListViewControllerTests.swift; sourceTree = "<group>"; };
+		EF29431420C93925000C16F3 /* ConversationContentViewController+Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationContentViewController+Header.swift"; sourceTree = "<group>"; };
 		EF2971552099AD3000EFE6A4 /* SelfProfileViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfProfileViewControllerTests.swift; sourceTree = "<group>"; };
 		EF2C189C1FED0D3000E9F2FD /* ConversationCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellTests.swift; sourceTree = "<group>"; };
 		EF2C189F1FED435600E9F2FD /* ConversationCell+BurstTimestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationCell+BurstTimestamp.swift"; sourceTree = "<group>"; };
@@ -4730,6 +4732,7 @@
 				8FC851A9199245760008B66B /* ConversationContentViewController.h */,
 				8FC851A6199245760008B66B /* ConversationContentViewController+Private.h */,
 				8FC851AA199245760008B66B /* ConversationContentViewController.m */,
+				EF29431420C93925000C16F3 /* ConversationContentViewController+Header.swift */,
 				EF15A7AF20BC08C000A045C7 /* ConversationContentViewController+SaveImage.swift */,
 				BFE277621D5B4FC50074DC6D /* ConversationContentViewController+MessageDeletion.swift */,
 				876113EA1DD1FEC4007F5969 /* ConversationContentViewController+Forward.swift */,
@@ -7031,6 +7034,7 @@
 				16E2A0A61F6BF233005F4DB1 /* ZMConversation+Calling.swift in Sources */,
 				BFCF31DD1DA52ECE0039B3DC /* KeyboardHeight.swift in Sources */,
 				87A752171E002F6C004317DB /* ConversationRootViewController.swift in Sources */,
+				EF29431520C93925000C16F3 /* ConversationContentViewController+Header.swift in Sources */,
 				87CA886E1DDF0075004101B6 /* UserConnectionViewController.swift in Sources */,
 				87D21AD71D8A98620075AB7A /* AccentColorPickerController.swift in Sources */,
 				875D48D11A6D087F00BB17B5 /* ConversationListViewController.m in Sources */,

@@ -200,6 +200,8 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     }
     
     self.messagePresenter.modalTargetController = self.parentViewController;
+
+    [self updateHeaderViewSize];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -220,6 +222,14 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     self.onScreen = NO;
     [super viewWillDisappear:animated];
 }
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+
+    [self updateHeaderViewSize];
+}
+
 
 - (void)scrollToLastUnreadMessageIfNeeded
 {
@@ -273,16 +283,20 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 }
 
 - (void)setConversationHeaderView:(UIView *)headerView
-{ ///TODO: use constrints??
-    CGSize fittingSize = CGSizeMake(self.tableView.bounds.size.width, self.headerHeight); // (width = 0, height = -20) ??
-    CGSize requiredSize = [headerView systemLayoutSizeFittingSize:fittingSize withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityDefaultLow];
-    headerView.frame = CGRectMake(0, 0, requiredSize.width, requiredSize.height);
+{
+    headerView.frame = [self headerFrameWithHeaderView:headerView];
     self.tableView.tableHeaderView = headerView;
 }
 
+
+/**
+ calculate header height depends on table height, reduce height if that is one message to show
+
+ @return <#return value description#>
+ */
 - (CGFloat)headerHeight
 {
-    CGFloat height = 20;
+    CGFloat height = 20; ///TODO: reduce height for bars
     if (self.messageWindow.messages.count == 1) {
         UITableViewCell *cell = [self cellForMessage:self.messageWindow.messages.firstObject];
         height += CGRectGetHeight(cell.bounds);
