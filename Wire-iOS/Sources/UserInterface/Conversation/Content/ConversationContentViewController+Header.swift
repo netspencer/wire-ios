@@ -26,9 +26,9 @@ final class Header: UITableViewHeaderFooterView {
     public init(connectionViewController: UserConnectionViewController) {
         self.connectionViewController = connectionViewController
 
-        super.init(reuseIdentifier:Header.headerViewReuseIdentifier)
+        super.init(reuseIdentifier:Header.headerViewReuseIdentifier) ///TODO: crash
 
-        ///TODO: embed
+        ///TODO: embed, constraint
 
         self.backgroundColor = .red
     }
@@ -43,13 +43,13 @@ final class Header: UITableViewHeaderFooterView {
 }
 
 extension ConversationContentViewController {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 100
+//    }
 
     ///TODO: work on footer
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
+        return 50 ///TODO: return calculated height
     }
 
 
@@ -59,7 +59,8 @@ extension ConversationContentViewController {
         }
     }
 
-    func tableView(tableView:UITableView, viewForFooterInSection section:Int) -> UIView? {
+    func tableView(_ tableView: UITableView,
+                   viewForFooterInSection section: Int) -> UIView? {
         var headerView:Header? = tableView.dequeueReusableHeaderFooterView(withIdentifier: Header.headerViewReuseIdentifier) as? Header
         if (headerView == nil) {
             headerView = Header(connectionViewController: self.connectionViewController!)
