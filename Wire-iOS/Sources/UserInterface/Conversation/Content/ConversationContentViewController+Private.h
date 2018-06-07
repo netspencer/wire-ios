@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MessagePresenter;
 @class FLAnimatedImageView;
 @class ImageMessageCell;
+@class UserConnectionViewController;
 
 @interface ConversationContentViewController ()
 
@@ -43,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable) FLAnimatedImageView *pinchImageView;
 @property (nonatomic, nullable) UIView *dimView;
 @property (nonatomic) CGPoint initialPinchLocation;
+@property (nonatomic, nullable) UserConnectionViewController *connectionViewController;
+@property (nonatomic, nullable) NSLayoutConstraint *headerViewHeight;
 
 - (void)removeHighlightsAndMenu;
 - (nullable ConversationCell *)cellForMessage:(id<ZMConversationMessage>)message;

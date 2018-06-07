@@ -43,7 +43,7 @@
 // helpers
 #import "Constants.h"
 
-@import PureLayout;
+//@import PureLayout;
 #import "UIView+Zeta.h"
 #import "Analytics.h"
 #import "AppDelegate.h"
@@ -95,7 +95,6 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 @property (nonatomic) BOOL hasDoneInitialLayout;
 @property (nonatomic) id messageWindowObserverToken;
 @property (nonatomic) BOOL onScreen;
-@property (nonatomic) UserConnectionViewController *connectionViewController;
 @property (nonatomic) DeletionDialogPresenter *deletionDialogPresenter;
 @end
 
@@ -114,6 +113,10 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
         self.messagePresenter.targetViewController = self;
         self.messagePresenter.modalTargetController = self.parentViewController;
         self.messagePresenter.analyticsTracker = self.analyticsTracker;
+
+        [self createTableView];
+        [self createTableViewHeader];
+        [self createConstraints];
     }
     
     return self;
@@ -134,18 +137,17 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     [self.dimView removeFromSuperview];
 }
 
-- (void)loadView
-{
-    [super loadView];
-    
-    self.tableView = [[UpsideDownTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:self.tableView];
-    [self.tableView autoPinEdgesToSuperviewEdges];
-
-    [self.tableView layoutIfNeeded];
-}
+//- (void)loadView
+//{
+//    [super loadView];
+//
+//    self.tableView = [[UpsideDownTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+//
+//    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self.view addSubview:self.tableView];
+////    [self.tableView autoPinEdgesToSuperviewEdges];
+////    [self.tableView layoutIfNeeded];
+//}
 
 - (void)viewDidLoad
 {
@@ -201,7 +203,7 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     
     self.messagePresenter.modalTargetController = self.parentViewController;
 
-    [self updateHeaderViewSize];
+    [self updateHeaderViewSize]; /// TODO: do it only if it is visible
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -215,6 +217,7 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 
     [self scrollToLastUnreadMessageIfNeeded];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -223,9 +226,9 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     [super viewWillDisappear:animated];
 }
 
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
+    [super viewDidLayoutSubviews];
 
     [self updateHeaderViewSize];
 }
@@ -260,6 +263,8 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 
 - (void)updateTableViewHeaderView
 {
+    // TODO: create header if not exist
+    /*
     if (self.messageWindow.messages.count != self.conversation.messages.count) {
         // Don't display the conversation header if the message window doesn't include the first message.
         return;
@@ -280,19 +285,20 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     } else {
         self.tableView.tableHeaderView = nil;
     }
+     */
 }
 
-- (void)setConversationHeaderView:(UIView *)headerView
-{
-    headerView.frame = [self headerFrameWithHeaderView:headerView];
-    self.tableView.tableHeaderView = headerView;
-}
+//- (void)setConversationHeaderView:(UIView *)headerView
+//{
+//    headerView.frame = [self headerFrameWithHeaderView:headerView];
+//    self.tableView.tableHeaderView = headerView;
+//}
 
 
 /**
  calculate header height depends on table height, reduce height if that is one message to show
 
- @return <#return value description#>
+ @return header's height
  */
 - (CGFloat)headerHeight
 {

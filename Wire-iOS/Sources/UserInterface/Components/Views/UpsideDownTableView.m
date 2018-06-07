@@ -56,18 +56,34 @@
     [super setScrollIndicatorInsets:UIEdgeInsetsMake(correctedScrollIndicatorInsets.bottom, correctedScrollIndicatorInsets.left, correctedScrollIndicatorInsets.top, correctedScrollIndicatorInsets.right)];
 }
 
-- (void)setTableHeaderView:(UIView *)tableHeaderView
+//- (UIView *)tableHeaderView {
+//    return super.tableFooterView;
+//}
+//
+- (void)setTableHeaderView:(UIView *)headerView
 {
-    tableHeaderView.transform = CGAffineTransformMakeScale(1, -1);
-    
-    [super setTableFooterView:tableHeaderView];
-}
+    headerView.transform = CGAffineTransformMakeScale(1, -1);
 
+    [super setTableFooterView:headerView];
+}
+//
+//- (UIView *)tableFooterView {
+//    return super.tableHeaderView;
+//}
+//
 - (void)setTableFooterView:(UIView *)tableFooterView
 {
     tableFooterView.transform = CGAffineTransformMakeScale(1, -1);
-    
+
     [super setTableHeaderView:tableFooterView];
+}
+
+- (UITableViewHeaderFooterView *)dequeueReusableHeaderFooterViewWithIdentifier:(NSString *)identifier {
+    UITableViewHeaderFooterView *view = [super dequeueReusableHeaderFooterViewWithIdentifier:identifier];
+
+    view.transform = CGAffineTransformMakeScale(1, -1);
+
+    return view;
 }
 
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier

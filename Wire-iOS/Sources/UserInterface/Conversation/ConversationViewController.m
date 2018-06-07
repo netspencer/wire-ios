@@ -204,7 +204,7 @@ static NSString* ZMLogTag ZM_UNUSED = @"UI";
     self.contentViewController = [[ConversationContentViewController alloc] initWithConversation:self.conversation];
     self.contentViewController.delegate = self;
     self.contentViewController.analyticsTracker = self.analyticsTracker;
-    self.contentViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.contentViewController.view.translatesAutoresizingMaskIntoConstraints = NO; ///TODO: triggers loadView
     self.contentViewController.bottomMargin = 16;
 }
 
