@@ -139,9 +139,12 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     [super loadView];
     
     self.tableView = [[UpsideDownTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
-    
     [self.tableView autoPinEdgesToSuperviewEdges];
+
+    [self.tableView layoutIfNeeded];
 }
 
 - (void)viewDidLoad
@@ -158,7 +161,6 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     self.messageWindowObserverToken = [MessageWindowChangeInfo addObserver:self forWindow:self.messageWindow];
     
     self.tableView.estimatedRowHeight = 80;
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.allowsSelection = YES;
     self.tableView.allowsMultipleSelection = NO;
     self.tableView.delegate = self;
@@ -263,7 +265,7 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
     }
     
     if (headerView) {
-        headerView.layoutMargins = UIEdgeInsetsMake(0, 20, 0, 20);
+        headerView.layoutMargins = UIEdgeInsetsMake(0, 20, 0, 20); ///TODO:
         [self setConversationHeaderView:headerView];
     } else {
         self.tableView.tableHeaderView = nil;
@@ -271,8 +273,8 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 }
 
 - (void)setConversationHeaderView:(UIView *)headerView
-{
-    CGSize fittingSize = CGSizeMake(self.tableView.bounds.size.width, self.headerHeight);
+{ ///TODO: use constrints??
+    CGSize fittingSize = CGSizeMake(self.tableView.bounds.size.width, self.headerHeight); // (width = 0, height = -20) ??
     CGSize requiredSize = [headerView systemLayoutSizeFittingSize:fittingSize withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityDefaultLow];
     headerView.frame = CGRectMake(0, 0, requiredSize.width, requiredSize.height);
     self.tableView.tableHeaderView = headerView;
@@ -286,7 +288,7 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
         height += CGRectGetHeight(cell.bounds);
     }
     
-    return self.tableView.bounds.size.height - height;
+    return self.tableView.bounds.size.height - height; ///TODO: table view is zero size???
 }
 
 - (void)setSearchQueries:(NSArray<NSString *> *)searchQueries
