@@ -19,33 +19,73 @@
 import UIKit
 import Cartography
 
+final class Header: UITableViewHeaderFooterView {
+    let connectionViewController: UserConnectionViewController
+    static let headerViewReuseIdentifier = "Header"
+
+    public init(connectionViewController: UserConnectionViewController) {
+        self.connectionViewController = connectionViewController
+
+        super.init(reuseIdentifier:Header.headerViewReuseIdentifier)
+
+        ///TODO: embed
+
+        self.backgroundColor = .red
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    public func config() {
+
+    }
+}
+
 extension ConversationContentViewController {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+
+    ///TODO: work on footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
+    }
+
+
+    func tableView(tableView:UITableView, willDisplayHeaderView view:UIView, forSection section:Int) {
+        if let headerView:Header = view as? Header {
+            headerView.config()
+        }
+    }
+
+    func tableView(tableView:UITableView, viewForFooterInSection section:Int) -> UIView? {
+        var headerView:Header? = tableView.dequeueReusableHeaderFooterView(withIdentifier: Header.headerViewReuseIdentifier) as? Header
+        if (headerView == nil) {
+            headerView = Header(connectionViewController: self.connectionViewController!)
+
+        }
+
+        headerView?.backgroundColor = .green
+        return headerView!
+    }
+
+    
     @objc func createConstraints() {
         constrain(self.view, tableView) { (selfView, tableView) in
             selfView.edges == tableView.edges
         }
 
-        createHeaderConstraints()
-    }
-
-    func createHeaderConstraints() {
-        guard let connectionViewController = connectionViewController else { return }
-
-        constrain(connectionViewController.view, tableView) { (headerView, tableView) in
-            headerView.centerX == tableView.centerX
-            headerView.width == tableView.width
-            headerViewHeight = headerView.height == 0
-//            headerView.top == tableView.top ///footer is header
-//            headerView.bottom == tableView.bottom ///footer is header
-        }
-
-        headerViewHeight?.constant = headerHeight()
     }
 
     @objc func createTableView() {
-        tableView = UpsideDownTableView(frame: CGRect.zero, style: .plain)
+        tableView = UpsideDownTableView(frame: CGRect.zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+
+//        [tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"SectionHeader"];
+
+        tableView.register(Header.self, forHeaderFooterViewReuseIdentifier: Header.headerViewReuseIdentifier)
     }
 
     /// TODO: update

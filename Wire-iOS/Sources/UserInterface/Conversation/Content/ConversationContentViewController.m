@@ -115,7 +115,7 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
         self.messagePresenter.analyticsTracker = self.analyticsTracker;
 
         [self createTableView];
-        [self createTableViewHeader];
+//        [self createTableViewHeader];
         [self createConstraints];
     }
     
@@ -636,6 +636,17 @@ const static int ConversationContentViewControllerMessagePrefetchDepth = 10;
 
 
 @implementation ConversationContentViewController (TableView)
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView * view = [UIView new];
+    return view;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView * view = [UIView new];
+    view.backgroundColor = [UIColor redColor];
+    return view;
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
